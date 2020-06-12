@@ -8,4 +8,7 @@ public interface OrdersService
 {
     List <Orders> findAllOrders();
     Orders findByOrderNum(long id);
+    Orders save(Orders order);
+    void delete(long id);
+
 }

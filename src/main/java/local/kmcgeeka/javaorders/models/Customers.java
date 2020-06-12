@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
-
 public class Customers
 {
     @Id
@@ -36,6 +35,7 @@ public class Customers
 //    AGENTCODE Long foreign key (one agent to many customers) not null
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties(value = "agent")
     private Agents agent; //we need an agent associated with each customer
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -71,6 +71,16 @@ public class Customers
         this.outstandingamt = outstandingamt;
         this.phone = phone;
         this.agent = agent;
+    }
+
+    public long getCustcode()
+    {
+        return custcode;
+    }
+
+    public void setCustcode(long custcode)
+    {
+        this.custcode = custcode;
     }
 
     public String getCustname()

@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-
 public class Orders
 {
     @Id
@@ -41,8 +40,8 @@ public class Orders
     public Orders(
         double ordamount,
         double advanceamount,
-        String orderdescription,
-        Customers customer)
+        Customers customer,
+        String orderdescription)
     {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
@@ -108,6 +107,19 @@ public class Orders
     public void setPayments(List<Payments> payments)
     {
         this.payments = payments;
+    }
+    public void addPayments(Payments payment)
+    {
+        this.payments.add(payment);
+    }
+
+    public void addPayment(Payments payment)
+    {
+        payment.getOrders()
+            .add(this); //pointer to self
+        payments.add(payment);  //when he has a one to many he uses a method instead of a loop
+        //needs to take care of both ends
+
     }
 
     @Override
