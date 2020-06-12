@@ -83,26 +83,22 @@ public class CustomersController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-
-
-
-
     // PATCH /customers/customer/{custcode} - updates customers with the new data. Only the new data is to be sent from the frontend client.
+    //update not replace
+    @PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+    public ResponseEntity<?> updateCustomer(@RequestBody Customers updateCustomer, @PathVariable long custcode)
+    {
+        customerService.update(updateCustomer, custcode);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-
-
-//DELETE /customers/customer/{custcode} - Deletes the given customer including any associated orders
-@DeleteMapping("/customers/{custcode}")
-public ResponseEntity<?> deleteCustomerById(@PathVariable long custcode)
-{
+    //DELETE /customers/customer/{custcode} - Deletes the given customer including any associated orders
+    @DeleteMapping("/customers/{custcode}")
+    public ResponseEntity<?> deleteCustomerById(@PathVariable long custcode)
+    {
     //no need to do produces JSON because nothing is returned
-    customerService.delete(custcode);
-    return new ResponseEntity<>(HttpStatus.OK);
-}
-
-
-
-
+        customerService.delete(custcode);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

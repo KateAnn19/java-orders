@@ -14,5 +14,6 @@ public interface CustomersService
     List<Customers> findByNameLike(String thename);
     List <Customers> findAllCustomers();
     Customers save(Customers customers);
+    Customers update(Customers customer, long id);
 
 }

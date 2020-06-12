@@ -127,10 +127,57 @@ public class CustomersServiceImpl implements CustomersService
 
 
 //PATCH
+@Transactional
+@Override
+    public Customers update(Customers customer, long id)
+    {
+        Customers currCust = findByCustomerCode(id);
+        if(customer.getCustname() != null)
+        {
+            currCust.setCustname(customer.getCustname().toLowerCase());
+        }
+        if(customer.getCustcity() != null)
+        {
+            currCust.setCustcity(customer.getCustcity().toLowerCase());
+        }
+        if(customer.getWorkingarea() != null)
+        {
+            currCust.setWorkingarea(customer.getWorkingarea().toLowerCase());
+        }
+        if(customer.getCustcountry() != null)
+        {
+            currCust.setCustcountry(customer.getCustcountry().toLowerCase());
+        }
+        if(customer.getGrade() != null)
+        {
+            currCust.setGrade(customer.getGrade().toLowerCase());
+        }
+        if(customer.hasvalueforopeningamt)
+        {
+            currCust.setOpeningamt(customer.getOpeningamt());
+        }
+        if(customer.hasvalueforrecvamt)
+        {
+            currCust.setReceiveamt(customer.getReceiveamt());
+        }
+        if(customer.hasvalueforpaymentamt)
+        {
+            currCust.setPaymentamt(customer.getPaymentamt());
+        }
+        if(customer.hasvalueforoutstandingamt)
+        {
+            currCust.setOutstandingamt(customer.getOutstandingamt());
+        }
+        if(customer.getPhone() != null)
+        {
+            currCust.setPhone(customer.getPhone());
+        }
+        if(customer.getAgent() != null)
+        {
+            Agents currentAgent = agentsService.findAgentByCode(customer.getAgent().getAgentcode());
+            currCust.setAgent(currentAgent);
+        }
 
-
-
-
-
-
+        return custrepos.save(currCust);
+    }
 }

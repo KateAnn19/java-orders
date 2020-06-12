@@ -25,9 +25,20 @@ public class Customers
 
     private String grade;
 
+    @Transient
+    public boolean hasvalueforopeningamt = false;
     private double openingamt;
+
+    @Transient
+    public boolean hasvalueforrecvamt = false;
     private double receiveamt;
+
+    @Transient
+    public boolean hasvalueforpaymentamt = false;
     private double paymentamt;
+
+    @Transient
+    public boolean hasvalueforoutstandingamt = false;
     private double outstandingamt;
 
     private String phone;
@@ -35,7 +46,7 @@ public class Customers
 //    AGENTCODE Long foreign key (one agent to many customers) not null
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
-    @JsonIgnoreProperties(value = "agent")
+    @JsonIgnoreProperties(value = "customers")
     private Agents agent; //we need an agent associated with each customer
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -140,6 +151,7 @@ public class Customers
 
     public void setOpeningamt(double openingamt)
     {
+        this.hasvalueforopeningamt = true;
         this.openingamt = openingamt;
     }
 
@@ -150,6 +162,7 @@ public class Customers
 
     public void setReceiveamt(double receiveamt)
     {
+        this.hasvalueforrecvamt = true;
         this.receiveamt = receiveamt;
     }
 
@@ -160,6 +173,7 @@ public class Customers
 
     public void setPaymentamt(double paymentamt)
     {
+        this.hasvalueforpaymentamt = true;
         this.paymentamt = paymentamt;
     }
 
@@ -170,6 +184,7 @@ public class Customers
 
     public void setOutstandingamt(double outstandingamt)
     {
+        this.hasvalueforoutstandingamt = true;
         this.outstandingamt = outstandingamt;
     }
 
